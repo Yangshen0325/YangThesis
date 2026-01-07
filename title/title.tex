@@ -33,12 +33,16 @@
 \cleardoublepage
 \thispagestyle{empty}
 
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north] at ([yshift=-2cm]current page.north) {%
+    \includegraphics{title/logos/rug}%
+  };
+\end{tikzpicture}
+
+% Now start the centered lines
+\vspace*{2.5cm}
+
 \begin{center}
-
-%% The following lines repeat the previous page exactly.
-
-\vspace*{2\bigskipamount}
-
 %% Print the title.
 {\makeatletter
 \titlestyle\bfseries\LARGE\@title
@@ -52,10 +56,6 @@
 \fi
 \makeatother}
 
-%% Uncomment the following lines to insert a vertically centered picture into
-%% the title page.
-%\vfill
-%\includegraphics{title}
 \vfill
 
 %% Apart from the names and dates, the following text is dictated by the
@@ -66,17 +66,19 @@
 \bigskip
 \bigskip
 
-ter verkrijging van de graad van doctor
+ter verkrijging van de graad van doctor aan de
 
-aan de Rijksuniversiteit Groningen,
+Rijksuniversiteit Groningen
 
-op gezag van de Rector Magnificus prof.~dr.~ir.~A.B.C~PLACEHOLDER,
+op gezag van de
 
-voorzitter van het College voor Promoties,
+rector magnificus prof.~dr.~ir.~J.M.A.~Scherpen
 
-in het openbaar te verdedigen
+en volgens besluit van het College voor Promoties.
 
-op vrijdag 99 november 2025 om 15.00 uur
+De openbare verdediging zal plaatsvinden op
+
+maandag 2 maart 2026 om 14.00 uur
 
 \bigskip
 \bigskip
@@ -94,8 +96,7 @@ door
 \bigskip
 \bigskip
 
-Master of Science in Wetland Ecology, \\
-Beijing Forestry University, China,
+Master of Science in Wetland Ecology,
 
 geboren te Chuzhou, China.
 
@@ -136,9 +137,6 @@ geboren te Chuzhou, China.
     Prof. dr. P. PLACEHOLDER, & Rijksuniversiteit Groningen \\
     Dr.\ Th.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
     Prof. dr. D. PLACEHOLDER, & Rijksuniversiteit Groningen \\
-
-    \multicolumn{2}{l}{Prof. dr. D. PLACEHOLDER has contributed to the end
-    phase of writing \ldots} \\
 \end{tabular}
 
 %% Include the following disclaimer for committee members who have contributed
@@ -152,13 +150,13 @@ geboren te Chuzhou, China.
 \noindent This thesis was supported by the University of Groningen--China Scholarship Council joint scholarship program and carried out under the auspices of Groningen Institute for Evolutionary Life Sciences.
 
 \medskip
-\vfill
-\begin{center}
-    \includegraphics[height=0.5in]{title/logos/rug}
-    \hspace{2em}
-    \includegraphics[height=0.5in]{title/logos/csc}
-\end{center}
-\vfill
+% \vfill
+% \begin{center}
+%     \includegraphics[height=0.5in]{title/logos/rug}
+%     \hspace{2em}
+%     \includegraphics[height=0.5in]{title/logos/csc}
+% \end{center}
+% \vfill
 
 \noindent
 \begin{tabular}{@{}p{0.2\textwidth}@{}p{0.8\textwidth}}
