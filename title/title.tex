@@ -1,37 +1,12 @@
+\includepdf[
+  pages=1,
+  fitpaper=true,
+  pagecommand={\thispagestyle{empty}}
+]{title/front-cover.pdf}
+
 \begin{titlepage}
 \thispagestyle{empty}
 \makeatletter
-
-\begin{tikzpicture}[remember picture,overlay]
-
-  % ---- Bottom artwork band ----
-  \node[anchor=south, inner sep=0pt] at (current page.south) {%
-    \includegraphics[width=\paperwidth, page=1]{title/front.pdf}%
-  };
-
-  % ---- Title block (upper third) ----
-  \node[
-    anchor=north,
-    align=center,
-    text width=0.78\paperwidth
-  ] at ([yshift=-28mm]current page.north) {%
-
-    {\CoverTitleStyle\fontsize{30}{36}\selectfont \@title\par}
-
-    \ifx\@subtitle\undefined\else
-      \vspace{0.6em}
-      {\CoverSubtitleStyle\fontsize{16}{20}\selectfont \@subtitle\par}
-    \fi
-
-    \vspace{1.6em}
-    {\CoverSubtitleStyle\fontsize{12}{16}\selectfont
-      \@firstname\ \@lastname\par}
-  };
-
-\end{tikzpicture}
-
-\cleardoublepage
-\thispagestyle{empty}
 
 \begin{tikzpicture}[remember picture,overlay]
   \node[anchor=north] at ([yshift=-2cm]current page.north) {%
@@ -124,19 +99,17 @@ geboren te Chuzhou, China.
 
 %% List the committee members, starting with the Rector Magnificus and the
 %% promotor(s) and ending with the reserve members.
-\medskip\noindent
 \begin{tabular}{p{4.5cm}l}
     Rector Magnificus, & voorzitter \\
-    Prof.\ dr.\ A.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
-    Dr.\ A.E.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
-    Dr.\ ir.\ G.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
+    Prof.\ dr.\ R.S.\ Etienne, & Rijksuniversiteit Groningen \\
+    Dr.\ L.L.\ Valente, & Naturalis Biodiversity Center \\
+    Dr.\ K.J.\ van Benthem, & Rijksuniversiteit Groningen \\
 
     \medskip
     \mbox{\emph{Onafhankelijke leden:}} & \\
-    Prof.\ dr.\ ir.\ A.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
-    Prof. dr. P. PLACEHOLDER, & Rijksuniversiteit Groningen \\
-    Dr.\ Th.\ PLACEHOLDER, & Rijksuniversiteit Groningen \\
-    Prof. dr. D. PLACEHOLDER, & Rijksuniversiteit Groningen \\
+    Prof.\ dr.\ E.C.\ Wit, & Università della Svizzera italiana \\
+    Prof.\ dr.\ F.\ Hartig, & Universität Regensburg \\
+    Prof.\ dr.\ S.\ Höhna, & Ludwig-Maximilians-Universität München \\
 \end{tabular}
 
 %% Include the following disclaimer for committee members who have contributed
@@ -177,7 +150,9 @@ geboren te Chuzhou, China.
 %\noindent Copyright \textcopyright\ 2015 by A.~Einstein
 
 %\medskip
-\noindent ISBN \ldots
+
+% ISBN is not available at the moment
+%\noindent ISBN \ldots
 
 \medskip
 \noindent An electronic version of this thesis is available at \\

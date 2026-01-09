@@ -245,9 +245,10 @@
   urlcolor   = rug-red   % optional: URLs as well
 }
 
-% Make all math in display equations rug-red
-% \RequirePackage{etoolbox}
+% Make all bib labels rug-red
+\RequirePackage{etoolbox}
 
+% Make all math in display equations rug-red
 % \preto{\equation}{\color{rug-red}}
 % \preto{\align}{\color{rug-red}}
 % \preto{\gather}{\color{rug-red}}
@@ -765,11 +766,8 @@
     \par % Ensure proper spacing after the environment
 }
 
-% Front Cover Typography
-\definecolor{CoverText}{RGB}{25,25,25} % near-black
-\newcommand{\CoverTitleFont}{\sffamily} % switch to sans with \titlefont
-\newcommand{\CoverTitleStyle}{\CoverTitleFont\color{CoverText}\bfseries}
-\newcommand{\CoverSubtitleStyle}{\CoverTitleFont\color{CoverText}}
+% Front Cover
+\RequirePackage{pdfpages}
 
 % Chapter 2 Requirements
 \RequirePackage{url}

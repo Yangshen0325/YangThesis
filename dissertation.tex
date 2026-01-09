@@ -69,17 +69,17 @@
 \chapter*{Bibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setheader{Bibliography}
-\bibliographystyle{unsrtnat}
+\bibliographystyle{unsrtnat-mod.bst}
 % argument is your BibTeX string definitions and bibliography database(s)
 \renewcommand{\bibsection}{} % Remove excess "References"
-\bibliography{dissertation}
+\bibliography{Thesis}
 
 %% \chapter*{Glossary}
-
+% Use "Acronyms and Terms" because I have both
 \glsaddall
-\printglossary[type=\acronymtype,title={Glossary}]
-\addcontentsline{toc}{chapter}{Glossary}
-\setheader{Glossary}
+\printglossary[type=\acronymtype,title={Acronyms and Terms}]
+\addcontentsline{toc}{chapter}{Acronyms and Terms}
+\setheader{Acronyms and Terms}
 
 \include{cv/cv}
 \include{publications/publications}
