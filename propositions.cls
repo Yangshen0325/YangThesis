@@ -461,3 +461,17 @@
     colorlinks = false
 }
 
+\RequirePackage{microtype}
+\RequirePackage{enumitem}
+
+% For A5, this often looks cleaner than full justification:
+\AtBeginEnvironment{enumerate}{\raggedright}
+
+\setlist[enumerate]{
+  leftmargin=*,
+  label=\textbf{\arabic*.},
+  itemsep=0.6\baselineskip,
+  topsep=0.2\baselineskip
+}
+
+\newcommand{\proprule}{\par\medskip\hrule height 0.4pt\medskip}
