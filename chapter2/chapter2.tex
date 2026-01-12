@@ -391,6 +391,7 @@ We output the node feature matrix of each tree as the node feature matrix $\math
 \label{appendix::data_transform::phylo_gnn::graph_attr}
 We store all the parameters used to simulate a tree (ground truth values) in the graph-level attributes $\mathcal{Y}$. These can have arbitrary length, which should be consistent with the number of the parameters to be estimated (the three diversification scenarios, BD, DDD and PBD, have different number of parameters). We store graph-level attributes as a "torch.float" floating point type tensor with length of the number of parameters we want to predict for each type of the phylogenetic tree. In PyTorch Geometric, graph-level attributes can be named as "data.y". The graph-level attributes are used as training targets to compute loss (see \autoref{appendixa::total_loss} for the definition of loss).
 
+\clearpage
 \subsection{Protocol Transforming Summary Statistics}
 \label{sec::methods::data_transform::stats_dnn}
 The summary statistics of a phylogeny are represented by a 1D vector, so the protocol for DNN is straightforward: we convert the vector into a tensor containing floating type data, with the shape [num\_stats], where "num\_stats" denotes the total number of statistics. This tensor has only one dimension. This conversion guarantees that each tensor is associated with its respective tree, with all contained statistics maintaining their original order. Within the PyTorch Geometric framework, these statistics are encapsulated as "data.stats" for each tree. When using DNN alone to estimate parameters from the summary statistics, the ground truth values of the parameters of the trees are stored in the same way as the graph-level attributes, as model training targets. When using DNN with other neural networks (e.g. in stacking and boosting strategies), they share the same ground truth values which are the graph-level attributes.
@@ -400,6 +401,8 @@ The summary statistics of a phylogeny are represented by a 1D vector, so the pro
 To address the varying lengths in branching times across different phylogenetic trees, we standardize these sequences by padding them to match the length of the longest branching time sequence. This is achieved by appending zeros to the shorter sequences until they match the predefined maximum length. The padded sequences are stored in tensors containing floating type data. As the original branching times do not contain zero values, this padding strategy allows us to distinguish between original data and padding. Consequently, we can pass masks of the sequences to the LSTM, which indicates the positions of the paddings, making LSTM concentrate only on the informative portions of the sequences, thereby optimizing its performance. When using LSTM alone to estimate parameters from the branching times, the ground truth values of the parameters of the trees are stored in the same way as the graph-level attributes, as model training targets. When using LSTM with other neural networks (e.g. in stacking and boosting strategies), they share the same ground truth values which are the graph-level attributes.
 
 An example of data components extracted and computed from a phylogenetic tree is illustrated in \autoref{fig::tree-summary}.
+
+\emph{(Figure on next page.)}
 
 \begin{figure}
     \resizebox{1.0\textwidth}{!}{
@@ -494,12 +497,15 @@ Subplex was the fastest among the tested algorithms, Simplex and DEoptim were sl
     \label{fig::ddd_mle_optimizer_tree_size}
 \end{figure}
 
-With the Simplex optimizer, we also compared the estimates between using two integration methods: one is matrix exponentiation ("analytical") and the other is a numerical integrator ("odeint::runge\_kutta\_cash\_karp54"). To ensure that the MLE estimates shown in the figures are reliable, we always adopted the results of the numerical integrator and excluded the data points on which the discrepancy of estimates between two integration methods is larger than 10\% relatively. See
+With the Simplex optimizer, we also compared the estimates between using two integration methods: one is matrix exponentiation ("analytical") and the other is a numerical integrator ("odeint::runge\_kutta\_cash\_karp54"). To ensure that the MLE estimates shown in the figures are reliable, we always adopted the results of the numerical integrator and excluded the data points on which the discrepancy of estimates between two integration methods is larger than 10\% relatively. See \autoref{table::integrator} for details.
 
 \begin{table}[ht]
     \caption{The distribution of relative differences of estimated parameters between using matrix exponentiation ("analytical") and numerical integrator ("odeint::runge\_kutta\_cash\_karp54") with the Simplex optimizer. The "Case" column indicates the maximum-likelihood estimation scenarios, "Best" represents using true speciation rate, true extinction rate and $K = \infty$ as starting points, "Naive" represents using true speciation rate, true extinction rate and $K = 10000$ as starting points. The "Parameter" column indicates each of the estimated parameters, "$K$" is the carrying capacity, "$\lambda$" is the speciation rate and "$\mu$" is the extinction rate. The rest of the columns indicate the ranges of measured relative differences between estimates of the two integration methods. The percentages under these columns indicate the proportions of data having the relative discrepancies smaller than the values indicated by the column names.}
-    \input{chapter2/integrator}\label{table::integrator}
+    \input{chapter2/integrator}
+    \label{table::integrator}
 \end{table}
+
+\emph{(Figures on next page.)}
 
 \clearpage
 \subsection{Estimation Uncertainty for Empirical Trees}
@@ -709,7 +715,7 @@ To compare with the original BD dataset, we trained neural networks on the re-ba
 \emph{(Figure on next page.)}
 
 \clearpage
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \resizebox{0.8\textwidth}{!}{
         \includegraphics{chapter2/bd_plot_tree_rebalance.png}
@@ -761,8 +767,6 @@ To analyze the relationships between summary statistics and the true parameters 
 The heatmap analysis reveals that a large number of summary statistics showed a high correlation with carrying capacity, whereas strong correlations with speciation and extinction rates are considerably less frequent. Generally, the correlation strength between the true parameters and extinction rate is markedly lower. These findings align with the observed performance of DNN, which generally yields good estimates for carrying capacity but is much less effective in accurately predicting speciation rates and particularly poor at estimating extinction rates. 
 
 We further evaluated the DNN's performance by benchmarking it against a range of non-neural-network regression techniques using the same summary statistics. These included multivariate linear regression, Ridge regression, Lasso regression, random forest regression, and gradient boosting regression. Our findings indicated that while these traditional regression and machine learning methods generally outperformed the DNN, they still did not match the performance of our more complex neural networks.
-
-Traditional regression methods and other machine learning techniques often outperform linear feed-forward neural networks in classical regression tasks. Such methods can stabilize performance with less data compared to neural networks, which usually require large datasets to generalize effectively. In our study, the dataset size -- consisting of 100,000 entries across 54 statistics -- may seem substantial, but it is still relatively modest when tasked with regressing multiple parameters simultaneously.
 
 Despite these findings, DNNs have shown efficacy in enhancing the performance of other neural networks, particularly through the prediction of residuals using summary statistics. DNN might not be the optimal choice for estimating parameters from summary statistics alone, but they can be valuable in ensemble learning strategies.
 
