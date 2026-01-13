@@ -313,6 +313,13 @@
     \hypersetup{pdfauthor=#1\ #2}%
 }
 
+% Dutch title/subtitle (class files already have @ as a letter)
+\newcommand*\dutchtitle[1]{\gdef\@dutchtitle{#1}}
+\let\@dutchtitle\@empty
+
+\newcommand*\dutchsubtitle[1]{\gdef\@dutchsubtitle{#1}}
+\let\@dutchsubtitle\@empty
+
 %% Remove the header and page number on empty pages.
 \def\cleardoublepage{%
     \clearpage%
@@ -787,3 +794,9 @@
 
 % Better line breaking for URLs
 \RequirePackage{xurl}
+
+% Change caption font colors and their labels
+\definecolor{CaptionTextGray}{gray}{0.45} % caption text color
+
+\captionsetup[figure]{labelfont={color=rug-red}, textfont={color=CaptionTextGray}}
+\captionsetup[table] {labelfont={color=rug-red}, textfont={color=CaptionTextGray}}
