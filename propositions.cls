@@ -103,22 +103,10 @@
     \def\headerstyle{\titlestyle}
 \fi
 
-%% Define the TU Delft house style colors.
-\definecolor{tudelft-cyan}{cmyk}{1,0,0,0}
-\definecolor{tudelft-black}{cmyk}{0,0,0,1}
-\definecolor{tudelft-white}{cmyk}{0,0,0,0}
-\definecolor{tudelft-sea-green}{cmyk}{0.54,0,0.32,0}
-\definecolor{tudelft-green}{cmyk}{1,0.15,0.4,0}
-\definecolor{tudelft-dark-blue}{cmyk}{1,0.66,0,0.4}
-\definecolor{tudelft-purple}{cmyk}{0.98,1,0,0.35}
-\definecolor{tudelft-turquoise}{cmyk}{0.82,0,0.21,0.08}
-\definecolor{tudelft-sky-blue}{cmyk}{0.45,0,0.06,0.06}
-\definecolor{tudelft-lavendel}{cmyk}{0.45,0.2,0,0.07}
-\definecolor{tudelft-orange}{cmyk}{0.02,0.56,0.84,0}
-\definecolor{tudelft-warm-purple}{cmyk}{0.58,1,0,0.02}
-\definecolor{tudelft-fuchsia}{cmyk}{0.19,1,0,0.19}
-\definecolor{tudelft-bright-green}{cmyk}{0.36,0,1,0}
-\definecolor{tudelft-yellow}{cmyk}{0.02,0,0.54,0}
+%% Define the RUG house style colors.
+\definecolor{rug-red}{cmyk}{0,1,0.8,0}
+\definecolor{rug-white}{cmyk}{0,0,0,0}
+\definecolor{rug-black}{cmyk}{0,0,0,1}
 
 %% Use TU Delft cyan as the color for titles, unless the 'print' option is
 %% specified, in which case we use anthracite, a dark gray, which is also used
@@ -127,7 +115,7 @@
 \if@print
     \colorlet{title}{anthracite}
 \else
-    \colorlet{title}{tudelft-cyan}
+    \colorlet{title}{rug-red}
 \fi
 \colorlet{thumb}{anthracite}
 
@@ -160,6 +148,14 @@
     \def\@lastname{#2}%
     \hypersetup{pdfauthor=#1\ #2}%
 }
+
+% Dutch title
+% Dutch title/subtitle (class files already have @ as a letter)
+\newcommand*\dutchtitle[1]{\gdef\@dutchtitle{#1}}
+\let\@dutchtitle\@empty
+
+\newcommand*\dutchsubtitle[1]{\gdef\@dutchsubtitle{#1}}
+\let\@dutchsubtitle\@empty
 
 %% Remove the header and page number on empty pages.
 \def\cleardoublepage{%
@@ -235,7 +231,7 @@
             %% Print the chapter number at the center right in the thumb index.
             \coordinate (center right) at ($(bottom right)+(0pt,0.5\thumbheight)$);
             \node at (center right)[anchor=east,inner sep=2\thumbedge]{
-                \titlefont\bfseries\color{tudelft-white}
+                \titlefont\bfseries\color{rug-white}
                 \fontsize{0.75\thumbheight}{0.75\thumbheight}\selectfont
                 \thechapter
             };
@@ -260,7 +256,7 @@
             %% Print the chapter number at the center right in the thumb index.
             \coordinate (center left) at ($(bottom left)+(0pt,0.5\thumbheight)$);
             \node at (center left)[anchor=west,inner sep=2\thumbedge]{
-                \titlefont\bfseries\color{tudelft-white}
+                \titlefont\bfseries\color{rug-white}
                 \fontsize{0.75\thumbheight}{0.75\thumbheight}\selectfont
                 \thechapter
             };
@@ -474,4 +470,60 @@
   topsep=0.2\baselineskip
 }
 
-\newcommand{\proprule}{\par\medskip\hrule height 0.4pt\medskip}
+\PassOptionsToPackage{svgnames}{xcolor}
+\RequirePackage[object=vectorian]{pgfornament} %%  http://altermundus.com/pages/tkz/ornament/index.html
+
+% Fancy separator
+\newcommand{\fancyseparator}[2]{%
+  \par\addvspace{0.9\baselineskip}%
+  \noindent\makebox[\linewidth][c]{%
+    \pgfornament[color=#1,width=0.55\linewidth]{#2}%
+  }%
+  \par\addvspace{0.9\baselineskip}%
+}
+
+% One icon used for all proposition items (bookmark-safe not needed here)
+\DeclareRobustCommand{\PropIcon}{\textcolor{rug-black}{\pgfornament[color=rug-black!85, width=0.04\linewidth, anchor=south east]{152}}}
+
+% A fancy itemize-like list for propositions
+\newlist{fancyproplist}{itemize}{1}
+\setlist[fancyproplist]{%
+  label=\PropIcon,
+  leftmargin=*,        % auto indent so wrapped lines align nicely
+  labelsep=0.8em,      % space between icon and text
+  itemsep=0.6\baselineskip,
+  topsep=0pt,
+  parsep=0pt
+}
+
+\RequirePackage{atbegshi}
+
+% Corner ornaments
+\newcommand{\PageCornersOn}{%
+  \AtBeginShipout{%
+    \AtBeginShipoutAddToBox{%
+      \begin{tikzpicture}[remember picture,overlay]
+        % Tune these:
+        \def\CornerInset{10mm}   % distance from page edges
+        \def\CornerSize{18mm}    % ornament size
+        \def\CornerColor{rug-black!45}
+
+        % Top-left
+        \node[anchor=north west] at ([xshift=\CornerInset,yshift=-\CornerInset]current page.north west)
+          {\pgfornament[color=\CornerColor,width=\CornerSize]{61}};
+
+        % Top-right (mirror horizontally)
+        \node[anchor=north east] at ([xshift=-\CornerInset,yshift=-\CornerInset]current page.north east)
+          {\pgfornament[color=\CornerColor,width=\CornerSize,symmetry=v]{61}};
+
+        % Bottom-left (mirror vertically)
+        \node[anchor=south west] at ([xshift=\CornerInset,yshift=\CornerInset]current page.south west)
+          {\pgfornament[color=\CornerColor,width=\CornerSize,symmetry=h]{61}};
+
+        % Bottom-right (mirror both)
+        \node[anchor=south east] at ([xshift=-\CornerInset,yshift=\CornerInset]current page.south east)
+          {\pgfornament[color=\CornerColor,width=\CornerSize,symmetry=c]{61}};
+      \end{tikzpicture}%
+    }%
+  }%
+}

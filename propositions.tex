@@ -11,133 +11,139 @@
 \setsansfont[Path = fonts/libertinus/, BoldFont=libertinussans-bold.otf, ItalicFont=libertinussans-italic.otf]{libertinussans-regular.otf}
 \setmathfont[Path = fonts/libertinus/]{libertinusmath-regular.otf}
 \setmonofont[Scale=MatchLowercase, Path=fonts/inconsolata/]{Inconsolata-Regular.ttf}
-%% The default style for text is Tahoma (sans-serif).
-%\renewcommand*\familydefault{\rmfamily}
+
+\newcommand{\propsepcolor}{rug-black!45}
+\newcommand{\propsepid}{88}
+
+% Same vertical space between:
+%  - header block -> separator
+%  - separator -> list
+%  - list -> separator
+%  - separator -> footer text
+\newcommand{\PropSepBefore}{\par\addvspace{0.85\baselineskip}}
+\newcommand{\PropSepAfter}{\par\addvspace{0.85\baselineskip}}
+
+\newcommand{\PropTopSeparator}{%
+  \PropSepBefore
+  \fancyseparator{\propsepcolor}{\propsepid}%
+  \PropSepAfter
+}
+\newcommand{\PropBottomSeparator}{%
+  \PropSepBefore
+  \fancyseparator{\propsepcolor}{\propsepid}%
+  \PropSepAfter
+}
 
 \begin{document}
 
-%% Specify the title and author of the thesis. This information will be used on
-%% both the English and Dutch side and in the metadata of the final PDF.
+% Turn on page corners
+\PageCornersOn
+
+%% Specify the title and author of the thesis.
 \title{Diversification Models and Neural Inference}
 \author{Tianjian}{Qin}
+\dutchtitle{Diversificatiemodellen en neurale inferentie}
+
+\vspace*{7mm}
 
 \begin{center}
-
 {\Large\titlefont\bfseries Propositions}
 
 \medskip
-
-accompanying the thesis
-
+accompanying the doctoral thesis
 \medskip
 
-%% Print the title.
-{\makeatletter
-\titlestyle\bfseries\large\@title
-\makeatother}
+% Title
+\makeatletter
+{\titlestyle\bfseries\large\@title}
+\makeatother
 
-%% Print the optional subtitle.
-{\makeatletter
-\ifx\@subtitle\undefined\else
-    \titlefont\titleshape\@subtitle
+\makeatletter
+\ifx\@subtitle\@empty\else
+  \medskip
+  {\titlefont\titleshape\@subtitle}
 \fi
-\makeatother}
+\makeatother
 
 \medskip
-
 by
-
 \medskip
 
-%% Print the full name of the author.
+% Author
 \makeatletter
 {\large\titlefont\bfseries\@firstname\ {\titleshape\@lastname}}
 \makeatother
-
 \end{center}
 
-\bigskip
-\proprule
-\begin{enumerate}
-  \item All models are wrong, but some are useful.---George E.\ P.\ Box
+\PropTopSeparator
+
+\begin{fancyproplist}
   \item Two people can share the same ``summary statistics''---but are they identical?
-  \item A pattern that cannot be seen is not a pattern I trust.
-  \item The world is deterministically stochastic: rules may be stable, outcomes are not.
-  \item Much of modelling is not discovering reality, but fitting it into assumptions.
+  \item Patterns that cannot be seen cannot be trusted.
+  \item The world is deterministically stochastic: rules are stable, outcomes are not.
+  \item Much of modeling is not discovering reality, but fitting it into assumptions.
   \item In biology, entities are interconnected almost everywhere you look.
   \item A fast estimator is only impressive when it fails honestly.
   \item In diversification studies, the hardest question is not ``what fits,'' but ``what else could fit.''
-\end{enumerate}
+\end{fancyproplist}
 
-\bigskip
-\bigskip
+\PropBottomSeparator
 
-%% Apart from the name and title of the supervisor, the following text is
-%% dictated by the promotieregelement.
 \begin{center}
-These propositions are regarded as opposable and defendable, and have been approved as such by the
-promotors.
+\textit{These propositions are regarded as opposable and defensible, and have been approved as such by the supervisors (promotors).}
 \end{center}
 
 \clearpage
+
 {\selectlanguage{dutch}
 
-\begin{center}
+\vspace*{7mm}
 
+\begin{center}
 {\Large\titlefont\bfseries Stellingen}
 
-\bigskip
-
+\medskip
 behorende bij het proefschrift
+\medskip
 
-\bigskip
+% Title
+\makeatletter
+{\titlestyle\bfseries\large\@dutchtitle}
+\makeatother
 
-%% Print the title.
-{\makeatletter
-\titlestyle\bfseries\large\@title
-\makeatother}
-
-%% Print the optional subtitle.
-{\makeatletter
-\ifx\@subtitle\undefined\else
-    \titlefont\titleshape\@subtitle
+\makeatletter
+\ifx\@dutchsubtitle\@empty\else
+  \medskip
+  {\titlefont\titleshape\@dutchsubtitle}
 \fi
-\makeatother}
+\makeatother
 
-\bigskip
-
+\medskip
 door
+\medskip
 
-\bigskip
-
-%% Print the full name of the author.
+% Author
 \makeatletter
 {\large\titlefont\bfseries\@firstname\ {\titleshape\@lastname}}
 \makeatother
-
 \end{center}
 
-\bigskip
-\bigskip
-\proprule
-\begin{enumerate}
-  \item Alle modellen zijn fout, maar sommige zijn nuttig.---George E.\ P.\ Box
+\PropTopSeparator
+
+\begin{fancyproplist}
   \item Twee mensen kunnen dezelfde ``samenvattende statistieken'' hebben---maar zijn ze identiek?
-  \item Een patroon dat je niet kunt zien, is geen patroon dat ik vertrouw.
-  \item De wereld is deterministisch stochastisch: regels kunnen stabiel zijn, uitkomsten niet.
+  \item Wat je niet kunt zien, kun je niet vertrouwen.
+  \item De wereld is deterministisch stochastisch: regels zijn stabiel, uitkomsten niet.
   \item Modelleren is vaak niet het ontdekken van de werkelijkheid, maar het inpassen ervan in aannames.
   \item In de biologie zijn entiteiten bijna overal met elkaar verbonden.
   \item Een snelle schatter is pas indrukwekkend als hij eerlijk faalt.
   \item In diversificatiestudies is de moeilijkste vraag niet ``wat past'', maar ``wat zou óók kunnen passen''.
-\end{enumerate}
+\end{fancyproplist}
 
-\bigskip
-\bigskip
+\PropBottomSeparator
 
-%% Apart from the name and title of the supervisor, the following text is
-%% dictated by the promotieregelement.
 \begin{center}
-Deze stellingen worden opponeerbaar en verdedigbaar geacht en zijn als zodanig goedgekeurd door de promotoren.
+\textit{Deze stellingen worden opponeerbaar en verdedigbaar geacht en zijn als zodanig goedgekeurd door de promotoren.}
 \end{center}
 
 }
