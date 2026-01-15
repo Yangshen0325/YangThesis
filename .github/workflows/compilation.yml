@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Compile LaTeX document
+      - name: Compile LaTeX document (Thesis)
         uses: xu-cheng/latex-action@v4
         with:
           root_file: dissertation.tex
@@ -32,10 +32,22 @@ jobs:
           extra_system_packages: inkscape
           args: -pdf -jobname=Thesis -file-line-error -halt-on-error -interaction=nonstopmode
 
+      # NEW: compile propositions.tex with XeLaTeX
+      - name: Compile LaTeX document (Propositions)
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: propositions.tex
+          latexmk_use_xelatex: true
+          latexmk_shell_escape: true
+          work_in_root_file_dir: true
+          extra_system_packages: inkscape
+          args: -pdf -jobname=Propositions -file-line-error -halt-on-error -interaction=nonstopmode
+
       - name: Verify output exists
         run: |
           ls -lah
           test -f Thesis.pdf
+          test -f Propositions.pdf
 
       - name: Publish PDF to compiled-pdf branch
         if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/compiled-pdf' }}
@@ -65,17 +77,20 @@ jobs:
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 
           cp -f "${GITHUB_WORKSPACE}/Thesis.pdf" Thesis.pdf
-          printf "This branch stores the latest compiled PDF.\nSource commit: %s\nUpdated by GitHub Actions.\n" "${SRC_SHA}" > README.md
+          cp -f "${GITHUB_WORKSPACE}/Propositions.pdf" Propositions.pdf
+          printf "This branch stores the latest compiled PDFs.\nSource commit: %s\nUpdated by GitHub Actions.\n" "${SRC_SHA}" > README.md
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add Thesis.pdf README.md
-          git commit -m "Update Thesis.pdf from ${SRC_SHA}" || true
+          git add Thesis.pdf Propositions.pdf README.md
+          git commit -m "Update PDFs from ${SRC_SHA}" || true
           git push -f origin "${BRANCH}"
 
-      - name: Upload PDF artifact
+      - name: Upload PDF artifacts
         uses: actions/upload-artifact@v5
         with:
-          name: PDF
-          path: Thesis.pdf
+          name: PDFs
+          path: |
+            Thesis.pdf
+            Propositions.pdf
