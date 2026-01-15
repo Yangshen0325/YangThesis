@@ -6,11 +6,22 @@
 
 This repository contains the complete LaTeX source, figures, and supporting files for my PhD thesis.
 
-<p align="center">
-  <kbd>
-    <img src="cover.png" alt="Thesis front cover" width="420">
-  </kbd>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <div><b>Thesis (front page)</b></div>
+      <kbd>
+        <img src="https://raw.githubusercontent.com/EvoLandEco/Thesis/compiled-pdf/Thesis_preview.png" alt="Thesis preview" width="360">
+      </kbd>
+    </td>
+    <td align="center">
+      <div><b>Propositions</b></div>
+      <kbd>
+        <img src="https://raw.githubusercontent.com/EvoLandEco/Thesis/compiled-pdf/Propositions_preview.png" alt="Propositions preview" width="360">
+      </kbd>
+    </td>
+  </tr>
+</table>
 
 ---
 
