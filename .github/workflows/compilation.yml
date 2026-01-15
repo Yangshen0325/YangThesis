@@ -32,7 +32,6 @@ jobs:
           extra_system_packages: inkscape
           args: -pdf -jobname=Thesis -file-line-error -halt-on-error -interaction=nonstopmode
 
-      # NEW: compile propositions.tex with XeLaTeX
       - name: Compile LaTeX document (Propositions)
         uses: xu-cheng/latex-action@v4
         with:
@@ -48,6 +47,15 @@ jobs:
           ls -lah
           test -f Thesis.pdf
           test -f Propositions.pdf
+
+      - name: Generate PNG previews
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          pdftoppm -png -r 200 -f 1 -l 1 -singlefile Thesis.pdf Thesis_preview
+          pdftoppm -png -r 200 -f 1 -l 1 -singlefile Propositions.pdf Propositions_preview
+          test -f Thesis_preview.png
+          test -f Propositions_preview.png
 
       - name: Publish PDF to compiled-pdf branch
         if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/compiled-pdf' }}
@@ -78,19 +86,23 @@ jobs:
 
           cp -f "${GITHUB_WORKSPACE}/Thesis.pdf" Thesis.pdf
           cp -f "${GITHUB_WORKSPACE}/Propositions.pdf" Propositions.pdf
-          printf "This branch stores the latest compiled PDFs.\nSource commit: %s\nUpdated by GitHub Actions.\n" "${SRC_SHA}" > README.md
+          cp -f "${GITHUB_WORKSPACE}/Thesis_preview.png" Thesis_preview.png
+          cp -f "${GITHUB_WORKSPACE}/Propositions_preview.png" Propositions_preview.png
+          printf "This branch stores the latest compiled PDFs and previews.\nSource commit: %s\nUpdated by GitHub Actions.\n" "${SRC_SHA}" > README.md
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add Thesis.pdf Propositions.pdf README.md
-          git commit -m "Update PDFs from ${SRC_SHA}" || true
+          git add Thesis.pdf Propositions.pdf Thesis_preview.png Propositions_preview.png README.md
+          git commit -m "Update compiled outputs from ${SRC_SHA}" || true
           git push -f origin "${BRANCH}"
 
-      - name: Upload PDF artifacts
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v5
         with:
-          name: PDFs
+          name: PDF
           path: |
             Thesis.pdf
             Propositions.pdf
+            Thesis_preview.png
+            Propositions_preview.png
