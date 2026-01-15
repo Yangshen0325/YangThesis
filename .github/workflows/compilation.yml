@@ -50,15 +50,17 @@ jobs:
 
       - name: Generate PNG previews
         run: |
+          set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y poppler-utils
-          pdftoppm -png -r 200 -f 1 -l 1 -singlefile Thesis.pdf Thesis_preview
-          pdftoppm -png -r 200 -f 1 -l 1 -singlefile Propositions.pdf Propositions_preview
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          pdftocairo -png -r 200 -f 1 -l 1 -singlefile Thesis.pdf Thesis_preview
+          pdftocairo -png -r 200 -f 1 -l 1 -singlefile Propositions.pdf Propositions_preview
+          ls -lah Thesis_preview.png Propositions_preview.png
           test -f Thesis_preview.png
           test -f Propositions_preview.png
 
       - name: Publish PDF to compiled-pdf branch
-        if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/compiled-pdf' }}
+        if: ${{ github.ref != 'refs/heads/compiled-pdf' }}
         env:
           BRANCH: compiled-pdf
           SRC_SHA: ${{ github.sha }}
