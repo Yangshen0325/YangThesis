@@ -34,7 +34,7 @@ This repository contains the complete LaTeX source, figures, and supporting file
 - **Qin, T.**, van Benthem, K., Valente, L.†, & Etienne, R.† (2025). *Parameter estimation from phylogenetic trees using neural networks and ensemble learning.* **Systematic Biology**.  https://doi.org/10.1093/sysbio/syaf060  
   † Joint senior authors.
 
-- **Qin, T.**, van Benthem, K., Valente, L.†, & Etienne, R.†. *Identifying evolutionary relatedness effects on diversification from phylogenies using neural networks.* Manuscript in preparation.  
+- **Qin, T.**, van Benthem, K., Valente, L.†, & Etienne, R.† (2026). *Identifying evolutionary relatedness effects on diversification from phylogenies using neural networks.* **bioRxiv**. https://doi.org/10.64898/2026.01.12.699140  
   † Joint senior authors.
 
 ---
