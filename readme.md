@@ -6,35 +6,17 @@
 
 This repository contains the complete LaTeX source, figures, and supporting files for my PhD thesis.
 
-<table align="center">
-  <tr>
-    <td align="center">
-      <div><b>Thesis (front page)</b></div>
-      <kbd>
-        <img src="https://raw.githubusercontent.com/EvoLandEco/Thesis/compiled-pdf/Thesis_preview.png" alt="Thesis preview" width="360">
-      </kbd>
-    </td>
-    <td align="center">
-      <div><b>Propositions</b></div>
-      <kbd>
-        <img src="https://raw.githubusercontent.com/EvoLandEco/Thesis/compiled-pdf/Propositions_preview.png" alt="Propositions preview" width="360">
-      </kbd>
-    </td>
-  </tr>
-</table>
-
 ---
 
 ## Publications
 
-- **Qin, T.**, Valente, L.†, & Etienne, R.† (2025). *Impact of evolutionary relatedness on species diversification and tree shape.* **Journal of Theoretical Biology**. https://doi.org/10.1016/j.jtbi.2024.111992  
-  🏆 Awarded the inaugural *Denise Kirschner Best Student Paper Prize* (2025).  
+-
   † Joint senior authors.
 
-- **Qin, T.**, van Benthem, K., Valente, L.†, & Etienne, R.† (2025). *Parameter estimation from phylogenetic trees using neural networks and ensemble learning.* **Systematic Biology**.  https://doi.org/10.1093/sysbio/syaf060  
+-
   † Joint senior authors.
 
-- **Qin, T.**, van Benthem, K., Valente, L.†, & Etienne, R.† (2026). *Identifying evolutionary relatedness effects on diversification from phylogenies using neural networks.* **bioRxiv**. https://doi.org/10.64898/2026.01.12.699140  
+-  
   † Joint senior authors.
 
 ---
@@ -42,9 +24,9 @@ This repository contains the complete LaTeX source, figures, and supporting file
 ## Citation
 
 ```bibtex
-@phdthesis{qin_diversification_2026,
-  title  = {Diversification Models and Neural Inference},
-  author = {Qin, Tianjian},
+@phdthesis{shen_2026,
+  title  = {TBD},
+  author = {Shen, Yang},
   school = {University of Groningen},
   year   = {2026},
 }
@@ -94,21 +76,20 @@ This repository contains the complete LaTeX source, figures, and supporting file
 ![GitHub Release](https://img.shields.io/github/v/release/EvoLandEco/EvoNN?include_prereleases)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
-*The illustrative implementation of the neural network parameter estimator is published in the EvoNN repository.*
+*The illustrative implementation of the neural network parameter estimator is published in the repository.*
 
-- [**EvoLandEco/EvoNN**](https://github.com/EvoLandEco/EvoNN/)
+- 
 
 ### Supplementary materials
 
 *Additional files and figures for the main thesis repository are maintained in the companion repository.*
 
-- [**EvoLandEco/Thesis-Appendix**](https://github.com/EvoLandEco/Thesis-Appendix/)
-
+- 
 ### Codebase 
 
-*The codebase used throughout the thesis is deposited in the eveGNN repository.*
+*The codebase used throughout the thesis is deposited in the repository.*
 
-- [**EvoLandEco/eveGNN**](https://github.com/EvoLandEco/eveGNN/)
+- 
 
 ---
 
@@ -142,13 +123,11 @@ If you use Overleaf’s GitHub integration, link this repository to your Overlea
 
 ## License
 
-- Code and build/config files: see [LICENSE](LICENSE)
+- Code and build/config files: see 
 
 ---
 
 ## Acknowledgements
 
-This thesis repository started from the LaTeX template by [**Moritz Beller**](https://github.com/Inventitech/phd-thesis-template)
 
-I am grateful for this solid foundation. Since adopting it, I have modified and extended the codebase (structure, styling, build/CI workflow, and compatibility fixes). Any remaining issues are my own.
 
